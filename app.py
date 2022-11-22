@@ -10,4 +10,23 @@ def index():
 def register():
     return render_template('register.html')
 
+@app.route('/savedetails',methods=['POST'])
+
+def savedetails():
+    UN = request.form['full_name']
+    EMAIL = request.form['email']
+    PSS = request.form['password']
+
+    
+    
+    Username = UN
+    Email = EMAIL
+    Password = PSS
+    
+ 
+
+
+    
+    
+
 app.run(debug=True)
