@@ -11,7 +11,19 @@
 </head>
 <body>
     <!-- Add navbar (use bootstrap) using common layout-->
-
-   
+    <h1>Home page after login</h1>
+    {{blogData}}
+    <div class="container">
+        {% for b in blogData:  %}    
+        <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{b[1]}}</h5>
+              <p class="card-text">{{b[2]}}</p>
+              <img src={{b[3]}} class="card-img-top w-50 h-25" alt="...">
+            </div>
+          </div>
+          {% endfor %}
+    </div>
+    
 </body>
 </html>
