@@ -69,30 +69,24 @@ body {
 	<div class="row">
 		<div class="col-md-8 mx-auto">
 			<div class="contact-form">
-				<h1>Get in Touch</h1>
+				<h1>Add a Blog</h1>
 				<form action="/examples/actions/confirmation.php" method="post">
 					<div class="row">
-						<div class="col-sm-6">
+						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="inputName">Name</label>
-								<input type="text" class="form-control" id="inputName" required>
+								<label for="inputTitle">Blog Title</label>
+								<input type="text" class="form-control" name="blogtitle" placeholder="Enter Blog Title" required>
 							</div>
 						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="inputEmail">Email</label>
-								<input type="email" class="form-control" id="inputEmail" required>
-							</div>
-						</div>
+
 					</div>            
+
 					<div class="form-group">
-						<label for="inputSubject">Subject</label>
-						<input type="text" class="form-control" id="inputSubject" required>
+						<label for="inputBlog">Message</label>
+						<textarea class="form-control" name="blogcontent" placeholder="Enter Blog Content" rows="5" required></textarea>
 					</div>
-					<div class="form-group">
-						<label for="inputMessage">Message</label>
-						<textarea class="form-control" id="inputMessage" rows="5" required></textarea>
-					</div>
+					<label class="form-label" for="customFile">Default file input example</label>
+<input type="file" class="form-control" id="customFile" />
 					<div class="text-center">
 						<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</button>
 					</div>            
