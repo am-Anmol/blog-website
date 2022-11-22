@@ -102,7 +102,13 @@ body {
 </style>
 </head>
 <body>
+	
 <div class="signup-form">
+	{% if msg: %}
+	<div class="alert alert-danger" role="alert">
+		{{msg}}
+	  </div>
+	{% endif %}
     <form action="/logged" method="post">
 		<h2>Log In</h2>
         <div class="form-group">

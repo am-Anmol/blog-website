@@ -88,7 +88,7 @@ def loggedin():
                 return redirect("/home")
             
             else:
-                return 'Incorrect username/password!'
+                return  render_template('login.html',msg="Incorrect username/password!")
     
 
 @app.route('/home')

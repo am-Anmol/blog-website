@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<P> Hello {{user|title}}</P>
+
+{% for message in get_flashed_message() %}
+    <div class="'alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            Single toggle
+          </button>
+    </div>
+{%endfor %}
+
+<br/>
+<div class="shadow-none p-3 mb-5 bg-light rounded">
+    <h2></h2>{{ post.title }}</h2><br/>
+    {{ post.author }}
+    {{ post.date_posted }}<br/>
+    {{ post.content }}<br/><br/>
+</div>
+
+<p><button type="button" class="btn btn-outline-secondary"><b><a href="{{url_for('posts')}}">Back »</b></button></p>
+
+
+{% endblock %}
