@@ -1,5 +1,7 @@
-import re
+#import libraries
 from flask import *
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
 app=Flask(__name__)
 
 @app.route('/')
