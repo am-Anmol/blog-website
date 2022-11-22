@@ -11,6 +11,9 @@ app.config['MYSQL_PASSWORD'] = 'root'#password
 
 app.config['MYSQL_DB'] = 'blogdata'#database name
 
+mysql = MySQL(app)
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -19,20 +22,24 @@ def index():
 def register():
     return render_template('register.html')
 
-@app.route('/savedetails',methods=['POST'])
+@app.route('/savedetails',methods=['GET', 'POST'])
 
 def savedetails():
-    UN = request.form['full_name']
-    EMAIL = request.form['email']
-    PSS = request.form['password']
-
+    if request.method == "POST":
+            UN = request.form['full_name']
+            EMAIL = request.form['email']
+            PSS = request.form['password']
+            cur = mysql.connection.cursor()
+            
+            
+            Name = UN
+            Email = EMAIL
+            Password = PSS
+            cur.execute("INSERT INTO User(Name, Email, Password) VALUES (%s, %s, %s)", (Name, Email, Password))
+            mysql.connection.commit()
+            cur.close()
+            return 'success'
     
-    
-    Username = UN
-    Email = EMAIL
-    Password = PSS
-    
- 
 
 
     
