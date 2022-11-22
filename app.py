@@ -64,7 +64,7 @@ def saveblog():
             blogImg = IMG
             createTime = time.strftime('%Y-%m-%d %H:%M:%S')
             UserId = session['userid']
-            isActive = 'True'
+            isActive = 'true'
             cur.execute("INSERT INTO blogs(blogTitle, blogDesc, blogImg, createTime, UserId, isActive) VALUES (%s, %s, %s, %s, %s, %s)", (blogTitle, blogDesc, blogImg, createTime, UserId, isActive))
             mysql.connection.commit()
             cur.close()
