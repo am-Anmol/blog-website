@@ -4,4 +4,4 @@ create table User(UserId int auto_increment primary key, Name varchar(100), Emai
 
 desc user;
 
-create table Blogs(BlogId int auto_increment primary key, blogTitle varchar(250),blogDesc text,blogImg blob, createTime date, UserId int, isActive varchar(50),foreign key(UserId) references User(UserId));
+create table Blogs(BlogId int auto_increment primary key, blogTitle varchar(250),blogDesc text,blogImg varchar(255), createTime dateTime, UserId int, isActive varchar(50),foreign key(UserId) references User(UserId));
