@@ -104,4 +104,18 @@ def logout():
    session.pop('userid', None)
    return render_template('index.html')
 
+
+@app.route("/user/<name>")
+def user(name):
+    return render_template("user.html",user=name)
+
+@app.route('/posts')
+def posts():
+    #posts = Posts.query.order_by(Posts.date_posted)
+    return render_template("posts.html", posts = posts)
+
+def post(id):
+    #post = Posts.query(id)
+    return render_template('post.html', post=post)
+
 app.run(debug=True)
