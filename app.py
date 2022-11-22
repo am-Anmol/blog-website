@@ -93,6 +93,9 @@ def loggedin():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM blogs where isActive='true'")
+    blog = cur.fetchall()
+    return render_template('home.html',blogData=blog)
 
 app.run(debug=True)
