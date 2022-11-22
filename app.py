@@ -61,6 +61,7 @@ def loggedin():
             account = cur.fetchone()
             if account:
                 session['loggedin'] = True
+                session['userid']=account[0]
                 session['email'] = account[2]
                 return 'Logged in successfully!'+session['email']
             
