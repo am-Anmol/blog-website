@@ -63,7 +63,7 @@ def loggedin():
                 session['loggedin'] = True
                 session['userid']=account[0]
                 session['email'] = account[2]
-                return 'Logged in successfully!'+session['email']
+                return redirect("/home")
             
             else:
                 return 'Incorrect username/password!'
