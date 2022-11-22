@@ -50,6 +50,34 @@ def savedetails():
 def add():
     return render_template('addblog.html')
 
+@app.route('/edit/<int:postid>')
+def edit(postid):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM blogs WHERE blogid='%s'", [postid])
+    data = cur.fetchone()
+    return render_template('editblog.html',dt=data)
+
+@app.route('/editblog',methods=['GET', 'POST'])
+def saveblog():
+    if request.method == "POST":
+            BT = request.form['blogtitle']
+            BC = request.form['blogcontent']
+            IMG = request.form['blogimage']
+            cur = mysql.connection.cursor()
+            
+            
+            blogTitle = BT
+            blogDesc = BC
+            blogImg = IMG
+            createTime = time.strftime('%Y-%m-%d %H:%M:%S')
+            UserId = session['userid']
+            isActive = 'true'
+            #cur.execute("update blogs set blogTitle, blogDesc, blogImg, createTime, UserId, isActive) VALUES (%s, %s, %s, %s, %s, %s)", (blogTitle, blogDesc, blogImg, createTime, UserId, isActive))
+            mysql.connection.commit()
+            cur.close()
+            return  render_template('home.html',msg="Blog updated Successfully")
+        
+        
 @app.route('/saveblog',methods=['GET', 'POST'])
 def saveblog():
     if request.method == "POST":
@@ -68,7 +96,7 @@ def saveblog():
             cur.execute("INSERT INTO blogs(blogTitle, blogDesc, blogImg, createTime, UserId, isActive) VALUES (%s, %s, %s, %s, %s, %s)", (blogTitle, blogDesc, blogImg, createTime, UserId, isActive))
             mysql.connection.commit()
             cur.close()
-            return render_template('home.html')
+            return  render_template('home.html',msg="Blog Added Successfully")
 
 
 @app.route('/logged',methods=['GET', 'POST'])
@@ -94,7 +122,7 @@ def loggedin():
 @app.route('/home')
 def home():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM blogs where isActive='true'")
+    cur.execute("SELECT * FROM blogs where isActive='true' order by blogId desc")
     blog = cur.fetchall()
     return render_template('home.html',blogData=blog)
 
@@ -111,11 +139,27 @@ def user(name):
 
 @app.route('/posts')
 def posts():
-    #posts = Posts.query.order_by(Posts.date_posted)
-    return render_template("posts.html", posts = posts)
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM blogs where isActive='true' and userid='%d' order by blogId desc"%(session['userid']))
+    blog = cur.fetchall()
+    return render_template('home.html',blogData=blog,my='yes')
 
-def post(id):
-    #post = Posts.query(id)
-    return render_template('post.html', post=post)
+@app.route('/srch',methods=['GET', 'POST'])
+def serch():
+    if request.method == "POST":
+            sq = "%"+request.form['search']+"%"
+            cur = mysql.connection.cursor()
+            
+            cur.execute("SELECT * FROM blogs where isActive='true' and blogTitle like '%s'"%(sq))
+            blog = cur.fetchall()
+            return render_template('home.html',blogData=blog)
+        
+@app.route('/deleteblog/<int:postid>')
+def delete(postid):
+    cur = mysql.connection.cursor()
+    cur.execute("update blogs set isactive='false' where blogId = '%s'",[postid])
+    mysql.connection.commit()
+    cur.close()
+    return redirect("/posts")
 
 app.run(debug=True)
