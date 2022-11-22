@@ -2,13 +2,14 @@
 from flask import *
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
+import time
 app=Flask(__name__)
 app.secret_key = "4db8b51a4017e427f3ea5c2137c450f767dce1bf"  
 
 #code for connection
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
-app.config['MYSQL_PASSWORD'] = '1234'#password
+app.config['MYSQL_PASSWORD'] = 'root'#password
 
 app.config['MYSQL_DB'] = 'blogdata'#database name
 
@@ -48,6 +49,27 @@ def savedetails():
 @app.route('/add')
 def add():
     return render_template('addblog.html')
+
+@app.route('/saveblog',methods=['GET', 'POST'])
+def saveblog():
+    if request.method == "POST":
+            BT = request.form['blogtitle']
+            BC = request.form['blogcontent']
+            IMG = request.form['blogimage']
+            cur = mysql.connection.cursor()
+            
+            
+            blogTitle = BT
+            blogDesc = BC
+            blogImg = IMG
+            createTime = time.strftime('%Y-%m-%d %H:%M:%S')
+            UserId = session['userid']
+            isActive = 'True'
+            cur.execute("INSERT INTO blogs(blogTitle, blogDesc, blogImg, createTime, UserId, isActive) VALUES (%s, %s, %s, %s, %s, %s)", (blogTitle, blogDesc, blogImg, createTime, UserId, isActive))
+            mysql.connection.commit()
+            cur.close()
+            return render_template('home.html')
+
 
 @app.route('/logged',methods=['GET', 'POST'])
 
