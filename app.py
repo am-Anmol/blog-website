@@ -9,7 +9,7 @@ app.secret_key = "4db8b51a4017e427f3ea5c2137c450f767dce1bf"
 #code for connection
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
-app.config['MYSQL_PASSWORD'] = 'root'#password
+app.config['MYSQL_PASSWORD'] = '1234'#password
 
 app.config['MYSQL_DB'] = 'blogdata'#database name
 
@@ -97,5 +97,11 @@ def home():
     cur.execute("SELECT * FROM blogs where isActive='true'")
     blog = cur.fetchall()
     return render_template('home.html',blogData=blog)
+
+@app.route('/logout')  
+def logout():
+   session.pop('email', None)
+   session.pop('userid', None)
+   return render_template('index.html')
 
 app.run(debug=True)
