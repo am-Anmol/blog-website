@@ -7,7 +7,7 @@ app=Flask(__name__)
 #code for connection
 app.config['MYSQL_HOST'] = 'localhost'#hostname
 app.config['MYSQL_USER'] = 'root'#username
-app.config['MYSQL_PASSWORD'] = 'root'#password
+app.config['MYSQL_PASSWORD'] = '1234'#password
 
 app.config['MYSQL_DB'] = 'blogdata'#database name
 
