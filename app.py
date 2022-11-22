@@ -40,7 +40,9 @@ def savedetails():
             cur.close()
             return 'success'
     
-
+@app.route('/add')
+def add():
+    return render_template('addblog.html')
 
     
     
