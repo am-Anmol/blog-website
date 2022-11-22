@@ -70,23 +70,23 @@ body {
 		<div class="col-md-8 mx-auto">
 			<div class="contact-form">
 				<h1>Add a Blog</h1>
-				<form action="/examples/actions/confirmation.php" method="post">
+				<form action="/saveblog" method="post">
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label for="inputTitle">Blog Title</label>
-								<input type="text" class="form-control" name="blogtitle" placeholder="Enter Blog Title" required>
+								<input type="text" class="form-control" id="inputTitle" name="blogtitle" placeholder="Enter Blog Title" required>
 							</div>
 						</div>
 
 					</div>            
 
 					<div class="form-group">
-						<label for="inputBlog">Message</label>
-						<textarea class="form-control" name="blogcontent" placeholder="Enter Blog Content" rows="5" required></textarea>
+						<label for="inputBlog">Enter Content</label>
+						<textarea class="form-control" id="inputBlog" name="blogcontent" placeholder="Enter Blog Content" rows="5" required></textarea>
 					</div>
 					<label class="form-label" for="customFile">Default file input example</label>
-<input type="file" class="form-control" id="customFile" />
+<input type="file" class="form-control" id="customFile" name="imagefile"/>
 					<div class="text-center">
 						<button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Send</button>
 					</div>            
