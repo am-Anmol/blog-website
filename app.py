@@ -35,16 +35,20 @@ def savedetails():
             UN = request.form['full_name']
             EMAIL = request.form['email']
             PSS = request.form['password']
-            cur = mysql.connection.cursor()
-            
-            
-            Name = UN
-            Email = EMAIL
-            Password = PSS
-            cur.execute("INSERT INTO User(Name, Email, Password) VALUES (%s, %s, %s)", (Name, Email, Password))
-            mysql.connection.commit()
-            cur.close()
-            return 'success'
+            CPS = request.form['confirm_password']
+            if(PSS!=CPS):
+                return render_template('register.html',msg="Password doesn't matches!")
+            else:
+                cur = mysql.connection.cursor()
+                
+                
+                Name = UN
+                Email = EMAIL
+                Password = PSS
+                cur.execute("INSERT INTO User(Name, Email, Password) VALUES (%s, %s, %s)", (Name, Email, Password))
+                mysql.connection.commit()
+                cur.close()
+                return render_template("login.html",msg="Register Successfully, Please Login")
     
 @app.route('/add')
 def add():
