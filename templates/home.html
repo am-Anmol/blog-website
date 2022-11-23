@@ -16,11 +16,6 @@
 <body>
     <!-- Add navbar (use bootstrap) using common layout-->
     <h3 class="text-center">Welcome to Blog website</h3><br>
-    {% if msg: %}
-	<div class="alert alert-success" role="alert">
-		{{msg}}
-	  </div>
-	{% endif %}
     <div class="container">
         {% for b in blogData:  %}    
         <div class="card text-center">

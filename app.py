@@ -57,8 +57,8 @@ def edit(postid):
     data = cur.fetchone()
     return render_template('editblog.html',dt=data)
 
-@app.route('/editblog',methods=['GET', 'POST'])
-def saveblog():
+@app.route('/editblog/<int:postid>',methods=['GET', 'POST'])
+def editblog(postid):
     if request.method == "POST":
             BT = request.form['blogtitle']
             BC = request.form['blogcontent']
@@ -69,13 +69,10 @@ def saveblog():
             blogTitle = BT
             blogDesc = BC
             blogImg = IMG
-            createTime = time.strftime('%Y-%m-%d %H:%M:%S')
-            UserId = session['userid']
-            isActive = 'true'
-            #cur.execute("update blogs set blogTitle, blogDesc, blogImg, createTime, UserId, isActive) VALUES (%s, %s, %s, %s, %s, %s)", (blogTitle, blogDesc, blogImg, createTime, UserId, isActive))
+            cur.execute("update blogs set blogTitle=%s, blogDesc=%s, blogImg=%s where blogid=%s", (blogTitle, blogDesc, blogImg,postid))
             mysql.connection.commit()
             cur.close()
-            return  render_template('home.html',msg="Blog updated Successfully")
+            return  render_template('index.html',msg="Blog updated Successfully")
         
         
 @app.route('/saveblog',methods=['GET', 'POST'])
@@ -96,7 +93,7 @@ def saveblog():
             cur.execute("INSERT INTO blogs(blogTitle, blogDesc, blogImg, createTime, UserId, isActive) VALUES (%s, %s, %s, %s, %s, %s)", (blogTitle, blogDesc, blogImg, createTime, UserId, isActive))
             mysql.connection.commit()
             cur.close()
-            return  render_template('home.html',msg="Blog Added Successfully")
+            return  render_template('index.html',msg="Blog Added Successfully")
 
 
 @app.route('/logged',methods=['GET', 'POST'])
